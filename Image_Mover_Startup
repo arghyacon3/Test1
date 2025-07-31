@@ -1,0 +1,23 @@
+import os
+import shutil
+
+# Define folder paths
+input_folder = 'C:/Users/arghya.guha/PycharmProjects/Sample-Project/inputImg'
+output_folder = 'C:/Users/arghya.guha/PycharmProjects/Sample-Project/outputImg'
+
+# Create folders if they don't exist
+os.makedirs(input_folder, exist_ok=True)
+os.makedirs(output_folder, exist_ok=True)
+
+# List all files in input folder
+for filename in os.listdir(input_folder):
+    source_path = os.path.join(input_folder, filename)
+    destination_path = os.path.join(output_folder, filename)
+
+    # Move only image files (basic filter)
+    if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
+        try:
+            shutil.move(source_path, destination_path)
+            print(f"Moved: {filename}")
+        except Exception as e:
+            print(f"Failed to move {filename}: {e}")
